@@ -19,19 +19,12 @@ startProgram()
 
 async function startProgram() {
     
-    manager();
-
-    // let {managerName, managerId, managerEmail, managerOfficeNumber} = await inquirer 
+    let managertest = await manager();
+    console.log(managertest);
     
-    //   {
-    //     type: 'list',
-    //     name: 'menu',
-    //     message: 'Add one of the following staff members, or finish building your team:',
-    //     choices: ['Engineer', 'Intern', 'Finish'],
-    //   }
+    
   
 
-    // console.log(managerName, managerId, managerEmail, managerOfficeNumber);
 
     // complete();
 
@@ -63,6 +56,13 @@ function manager() {
         },
     ])
 }
+
+//   {
+    //     type: 'list',
+    //     name: 'menu',
+    //     message: 'Add one of the following staff members, or finish building your team:',
+    //     choices: ['Engineer', 'Intern', 'Finish'],
+    //   }
 
 
 

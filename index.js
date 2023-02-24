@@ -134,11 +134,6 @@ async function startProgram() {
         }
     }
 
-    
-    
-
-    // menuReturn = await menu();
-
     let htmlDoc = render(team)
 
     fs.writeFile(outputPath, htmlDoc, (err) => err && console.error(err));

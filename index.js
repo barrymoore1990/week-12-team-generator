@@ -14,11 +14,11 @@ const Employee = require("./lib/Employee");
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 let team = [];
-let menuReturn = ""
+let menuReturn = "";
+let engineerReturn = "";
+let internReturn = "";
 
 startProgram()
-
-
 
 function manager() {
     return inquirer
@@ -54,8 +54,11 @@ function menu() {
             name: 'menu',
             message: 'Add one of the following staff members, or finish building your team:',
             choices: ['Engineer', 'Intern', 'Finish'],
-        }
+        },
+        
     ])
+    
+    
 }
 
 function engineer() {
@@ -110,44 +113,33 @@ function intern() {
     ])
 }
 
-
-
-
-
-
-// push each new team engineer and intern too
-
-
 async function startProgram() {
     
     let managerReturn = await manager();
     menuReturn = await menu();
-    console.log(menuReturn.menu);
     team.push(new Manager(managerReturn.managerName, managerReturn.managerId, managerReturn.managerEmail, managerReturn.managerOfficeNumber))
 
-    if (menuReturn.menu === "Engineer") {
-        let engineerReturn = await engineer();
-        console.log(engineerReturn);
-        team.push(new Engineer(engineerReturn.engineerName, engineerReturn.engineerId, engineerReturn.engineerEmail, engineerReturn.githubUsername))
-        menuReturn = await menu();
-    } 
-    if (menuReturn.menu === "Intern") {
-        let internReturn = await intern();
-        console.log(internReturn);
-        team.push(new Intern(internReturn.internName, internReturn.internId, internReturn.internEmail, internReturn.internSchool))
-        menuReturn = await menu();
+    while (menuReturn.menu !== "Finish") {
+        if (menuReturn.menu === "Engineer") {
+            engineerReturn = await engineer();
+            console.log(engineerReturn);
+            team.push(new Engineer(engineerReturn.engineerName, engineerReturn.engineerId, engineerReturn.engineerEmail, engineerReturn.githubUsername))
+            menuReturn = await menu();
+        } 
+        if (menuReturn.menu === "Intern") {
+            internReturn = await intern();
+            console.log(internReturn);
+            team.push(new Intern(internReturn.internName, internReturn.internId, internReturn.internEmail, internReturn.internSchool))
+            menuReturn = await menu();
+        }
     }
 
     
     
-    
-  
 
-
+    // menuReturn = await menu();
 
     let htmlDoc = render(team)
 
     fs.writeFile(outputPath, htmlDoc, (err) => err && console.error(err));
-
-    
 }

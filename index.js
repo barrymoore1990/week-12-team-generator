@@ -16,20 +16,67 @@ const Employee = require("./lib/Employee");
 let team = [];
 
 startProgram()
+
 async function startProgram() {
     
-    team.push(new Manager("Barry", 1, "b@b.com", 1))
+    manager();
+
+    // let {managerName, managerId, managerEmail, managerOfficeNumber} = await inquirer 
+    
+    //   {
+    //     type: 'list',
+    //     name: 'menu',
+    //     message: 'Add one of the following staff members, or finish building your team:',
+    //     choices: ['Engineer', 'Intern', 'Finish'],
+    //   }
+  
+
+    // console.log(managerName, managerId, managerEmail, managerOfficeNumber);
+
+    // complete();
+
+    
+}
+
+function manager() {
+    return inquirer
+    .prompt([
+        {
+          type: 'input',
+          name: 'managerName',
+          message: 'What is the managers name?',
+        },
+        {
+          type: 'input',
+          name: 'managerId',
+          message: 'What is their employee ID?',
+        },
+        {
+          type: 'input',
+          name: 'managerEmail',
+          message: 'What is their email?',
+        },
+        {
+          type: 'input',
+          name: 'managerOfficeNumber',
+          message: 'What is their office number?',
+        },
+    ])
+}
+
+
+
+function complete() {
+    team.push(new Manager(managerName, managerId, managerEmail, managerOfficeNumber))
 
     let htmlDoc = render(team)
 
-    await fs.writeFile(outputPath, htmlDoc, (err) => err && console.error(err));
-
+    fs.writeFile(outputPath, htmlDoc, (err) => err && console.error(err));
 }
 
-// check last project - might explain inquirer?
+
+
 
 // push each new team engineer and intern too
-// Once complete, call render(team)
 
-// fs writefile to the output directory / path
-// write the render string to file
+

@@ -17,19 +17,7 @@ let team = [];
 
 startProgram()
 
-async function startProgram() {
-    
-    let managertest = await manager();
-    console.log(managertest);
-    
-    
-  
 
-
-    // complete();
-
-    
-}
 
 function manager() {
     return inquirer
@@ -57,21 +45,22 @@ function manager() {
     ])
 }
 
-//   {
-    //     type: 'list',
-    //     name: 'menu',
-    //     message: 'Add one of the following staff members, or finish building your team:',
-    //     choices: ['Engineer', 'Intern', 'Finish'],
-    //   }
+function menu() {
+    return inquirer
+    .prompt([
+        {
+            type: 'list',
+            name: 'menu',
+            message: 'Add one of the following staff members, or finish building your team:',
+            choices: ['Engineer', 'Intern', 'Finish'],
+        }
+    ])
+}
 
 
 
 function complete() {
-    team.push(new Manager(managerName, managerId, managerEmail, managerOfficeNumber))
 
-    let htmlDoc = render(team)
-
-    fs.writeFile(outputPath, htmlDoc, (err) => err && console.error(err));
 }
 
 
@@ -80,3 +69,22 @@ function complete() {
 // push each new team engineer and intern too
 
 
+async function startProgram() {
+    
+    let managerReturn = await manager();
+    console.log(managerReturn);
+    let menuReturn = await menu();
+    console.log(menuReturn);
+    
+    
+  
+
+
+    team.push(new Manager(managerReturn))
+
+    let htmlDoc = render(team)
+
+    fs.writeFile(outputPath, htmlDoc, (err) => err && console.error(err));
+
+    
+}

@@ -72,15 +72,15 @@ function complete() {
 async function startProgram() {
     
     let managerReturn = await manager();
-    console.log(managerReturn.managerName);
+    console.log(managerReturn);
     let menuReturn = await menu();
-    console.log(menuReturn);
+    console.log(menuReturn.menu);
     
     
   
 
 
-    team.push(new Manager(managerReturn))
+    team.push(new Manager(managerReturn.managerName, managerReturn.managerId, managerReturn.managerEmail, managerReturn.managerOfficeNumber))
 
     let htmlDoc = render(team)
 

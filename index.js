@@ -72,7 +72,7 @@ function complete() {
 async function startProgram() {
     
     let managerReturn = await manager();
-    console.log(managerReturn);
+    console.log(managerReturn.managerName);
     let menuReturn = await menu();
     console.log(menuReturn);
     

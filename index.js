@@ -100,10 +100,13 @@ async function startProgram() {
     let managerReturn = await manager();
     menuReturn = await menu();
     console.log(menuReturn.menu);
+    team.push(new Manager(managerReturn.managerName, managerReturn.managerId, managerReturn.managerEmail, managerReturn.managerOfficeNumber))
+
 
     if (menuReturn.menu === "Engineer") {
         let engineerReturn = await engineer();
         console.log(engineerReturn);
+        team.push(new Engineer(engineerReturn.engineerName, engineerReturn.engineerId, engineerReturn.engineerEmail, engineerReturn.githubUsername))
         menuReturn = await menu();
     }
 
@@ -113,7 +116,6 @@ async function startProgram() {
   
 
 
-    team.push(new Manager(managerReturn.managerName, managerReturn.managerId, managerReturn.managerEmail, managerReturn.managerOfficeNumber))
 
     let htmlDoc = render(team)
 

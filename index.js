@@ -82,10 +82,33 @@ function engineer() {
             message: 'What is the engineers Github username?',
         },
     ])
-    
 }
 
-
+function intern() {
+    return inquirer
+    .prompt([
+        {
+          type: 'input',
+          name: 'internName',
+          message: 'What is the interns name?',
+        },
+        {
+            type: 'input',
+            name: 'internId',
+            message: 'What is the interns ID?',
+        },
+        {
+            type: 'input',
+            name: 'internEmail',
+            message: 'What is the interns email?',
+        },
+        {
+            type: 'input',
+            name: 'internSchool',
+            message: 'What is the interns school?',
+        },
+    ])
+}
 
 
 
@@ -102,11 +125,16 @@ async function startProgram() {
     console.log(menuReturn.menu);
     team.push(new Manager(managerReturn.managerName, managerReturn.managerId, managerReturn.managerEmail, managerReturn.managerOfficeNumber))
 
-
     if (menuReturn.menu === "Engineer") {
         let engineerReturn = await engineer();
         console.log(engineerReturn);
         team.push(new Engineer(engineerReturn.engineerName, engineerReturn.engineerId, engineerReturn.engineerEmail, engineerReturn.githubUsername))
+        menuReturn = await menu();
+    } 
+    if (menuReturn.menu === "Intern") {
+        let internReturn = await intern();
+        console.log(internReturn);
+        team.push(new Intern(internReturn.internName, internReturn.internId, internReturn.internEmail, internReturn.internSchool))
         menuReturn = await menu();
     }
 

@@ -14,6 +14,7 @@ const Employee = require("./lib/Employee");
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 let team = [];
+let menuReturn = ""
 
 startProgram()
 
@@ -57,11 +58,36 @@ function menu() {
     ])
 }
 
-
-
-function complete() {
-
+function engineer() {
+    return inquirer
+    .prompt([
+        {
+          type: 'input',
+          name: 'engineerName',
+          message: 'What is the engineers name?',
+        },
+        {
+            type: 'input',
+            name: 'engineerId',
+            message: 'What is the engineers ID?',
+        },
+        {
+            type: 'input',
+            name: 'engineerEmail',
+            message: 'What is the engineers email?',
+        },
+        {
+            type: 'input',
+            name: 'githubUsername',
+            message: 'What is the engineers Github username?',
+        },
+    ])
+    
 }
+
+
+
+
 
 
 
@@ -72,9 +98,16 @@ function complete() {
 async function startProgram() {
     
     let managerReturn = await manager();
-    console.log(managerReturn);
-    let menuReturn = await menu();
+    menuReturn = await menu();
     console.log(menuReturn.menu);
+
+    if (menuReturn.menu === "Engineer") {
+        let engineerReturn = await engineer();
+        console.log(engineerReturn);
+        menuReturn = await menu();
+    }
+
+    
     
     
   
